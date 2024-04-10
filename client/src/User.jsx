@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 function Users () {
     const [users,SetUsers]=useState([])    
     useEffect(()=>{
-        axios.get('http://localhost:3001')
+        axios.get('http://localhost:3001/')
         .then(result => SetUsers(result.data))
         .catch(err => console.log(err))
     },[])
