@@ -24,6 +24,13 @@ app.post("/createUser", (req, res) => {
 }
 )
 
+app.get('/getUser/',(req, res) =>{
+    const id = req.params.id;
+    UserModel.findById({_id:id})
+    .then(users => res.json(users))
+    .catch(err=> res.json(err))
+})
+
 app.listen(3001,() => {
     console.log("Server is Running")
 })
