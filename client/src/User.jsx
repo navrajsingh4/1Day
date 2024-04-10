@@ -1,16 +1,15 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 
 function Users () {
-    const [users, setUsers] = useState([]);    
-
-    useEffect(() => {
-        axios.get('http://localhost:3001/')
-        .then(result => setUsers(result.data))
-        .catch(err => console.log(err));
-    }, []);
-
+    const [users,SetUsers]=useState([])    
+    useEffect(()=>{
+        axios.get('http://localhost:3001')
+        .then(result => SetUsers(result.data))
+        .catch(err => console.log(err))
+    },[])
     return (
+        
         <div>
             <table className="table">
                 <thead>
@@ -20,27 +19,26 @@ function Users () {
                         <th>Phone</th>
                         <th>Date</th>
                         <th>Nationality</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                    users.map((user) => {
-                        return
-                        <tr>
-                            <td>{user.Name}</td>
-                            <td>{user.Email}</td>
-                            <td>{user.Phone}</td>
-                            <td>{user.Date}</td>
-                            <td>{user.Nationality}</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                    })
+                        users.map((display)=>{
+                            return <tr>
+                                <td>{display.name}</td>
+                                <td>{display.email}</td>
+                                <td>{display.phone}</td>
+                                <td>{display.date}</td>
+                                <td>{display.nationality}</td>
+                                <td><button>Edit</button></td>
+                            </tr>
+                        }
+                    )
                     }
+
                 </tbody>
             </table>
         </div>
-    );
+    )
 }
-
 export default Users;

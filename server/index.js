@@ -8,8 +8,9 @@ app.use(express.json())
 
 
 mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne")
+//mongoose.connect("mongodb://127.0.0.1:27017/DayOne")
 
-app.get("/",(req,res) => {
+app.get("/", (req,res) => {
     UserModel.find({})
     .then(users => res.json(users))
     .then(err => res.json(err))
