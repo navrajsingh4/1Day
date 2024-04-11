@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import  axios  from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import  axios  from "axios"
 
 function UpdateUsers() {
-    const {id} = useSearchParams()
+    const {id} = useParams()
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -12,21 +12,20 @@ function UpdateUsers() {
     const navigate= useNavigate();
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/getUser/'+id)
+        axios.get('http://localhost:3001/getUser/' +id)
         .then(result => {console.log(result)
-            setName(result.date.name)
-            setEmail(result.date.email)
-            setPhone(result.date.phone)
-            setDate(result.date.date)
-            setNationality(result.date.nationality)
+            setName(result.data.name)
+            setEmail(result.data.email)
+            setPhone(result.data.phone)
+            setDate(result.data.date)
+            setNationality(result.data.nationality)
         
         })
-
-        //.catch(err => console.log(err))
+        .catch(err => console.log(err))
     },[])
 
 
-    const handleSubmit = (event) => {
+    /*const handleSubmit = (event) => {
         event.preventDefault();
         // Perform axios request to update user details
         // For simplicity, assuming a POST request to a specific endpoint for updating user details
@@ -45,7 +44,22 @@ function UpdateUsers() {
             // Handle error
             console.error("Error updating user details:", error);
         });
-    };
+    }; */
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.put("http://localhost:3001/updateUser/"+id,{name,email,phone,date,nationality})
+        .then(result => {
+            console.log(result)
+            navigate('/')
+            })
+        .catch(err => console.log(err))
+    }
+
+
+
+
 
     return (
         <div>

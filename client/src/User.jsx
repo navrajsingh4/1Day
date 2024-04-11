@@ -56,9 +56,7 @@ function Users() {
                                 <td>{user.date}</td>
                                 <td>{user.nationality}</td>
                                 <td>
-                                    <button 
-                                        className="action-btn edit" 
-                                        onClick={() => navigateToUpdateUser(user._id)}>Update</button> {/* Pass the _id to the function */}
+                                <button className="action-btn delete"><Link to={`/update/${display._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
                                     <button 
                                         className="action-btn delete" 
                                         onClick={() => onDeleteUser(user._id)}>Delete</button> {/* Pass the _id to the function */}

@@ -12,6 +12,33 @@ mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/D
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
+.then(() => console.log("MongoDC connected"))
+.catch(err => console.log('error', err));
+
+
+/*app.get('/', async (req,res) => {
+    UserModel.find({})
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+}
+
+) */
+
+app.put('/updateUser/:id', (req, res) =>{
+    const id = req.params.id;
+    UserModel.findByIdAndUpdate({_id: id}, {name: req.body.name, email: req.body.email, phone: req.body.phone, date: req.body.date, nationality: req.body.nationality})
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+
+})
+
+
+app.get('/getUser/:id',(req, res) =>{
+    const id = req.params.id;
+    UserModel.findById({_id:id})
+    .then(users => res.json(users))
+    .catch(err=> res.json(err))
+})
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log('error', err));
 
@@ -64,7 +91,7 @@ app.delete('/deleteUser/:id', async (req, res) => {
 });
 
 // Update user
-app.put('/updateUser/:id', async (req, res) => {
+/*app.put('/updateUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const user = await UserModel
@@ -79,7 +106,7 @@ app.put('/updateUser/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
-);
+); */
 
 // Start
 app.listen(3001, () => {
