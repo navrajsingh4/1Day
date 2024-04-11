@@ -12,16 +12,15 @@ mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/D
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected successfully"))
-.catch(err => console.log('Could not connect to MongoDB:', err));
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.log('error', err));
 
 // get users
 app.get("/", async (req, res) => {
     try {
-        const users = await UserModel.find({}).exec(); // Use exec to get a true Promise
+        const users = await UserModel.find({}).exec();
         res.json(users);
     } catch (err) {
-        // This will catch any errors that occur during the finding process
         res.status(500).json({ error: err.message });
     }
 });
@@ -52,5 +51,5 @@ app.get('/getUser/:id', async (req, res) => {
 
 // Start
 app.listen(3001, () => {
-    console.log("Server is Running");
+    console.log("server running");
 });
