@@ -1,8 +1,8 @@
 /* CreateUsers.css */
 .container {
     display: flex;
-    justify-content: space-between; /* Horizontally align items */
-    align-items: center; /* Vertically center items */
+    justify-content:center;
+    align-items: center; 
 }
 
 .form-container {

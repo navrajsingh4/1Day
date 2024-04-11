@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -15,7 +14,6 @@ mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/D
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log('error', err));
 
-// get users
 app.get("/", async (req, res) => {
     try {
         const users = await UserModel.find({}).exec();
@@ -25,7 +23,6 @@ app.get("/", async (req, res) => {
     }
 });
 
-// Create user
 app.post("/createUser", async (req, res) => {
     try {
         const user = await UserModel.create(req.body);
@@ -34,8 +31,6 @@ app.post("/createUser", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-// Retrieve user by ID 
 app.get('/getUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -49,7 +44,6 @@ app.get('/getUser/:id', async (req, res) => {
     }
 });
 
-// Delete user
 app.delete('/deleteUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -62,14 +56,12 @@ app.delete('/deleteUser/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-// Update user
 app.put('/updateUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const user = await UserModel
             .findByIdAndUpdate(id, req
-            .body, { new: true }) // Use req.body here
+            .body, { new: true }) 
             .exec();
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -81,7 +73,6 @@ app.put('/updateUser/:id', async (req, res) => {
 }
 );
 
-// Start
 app.listen(3001, () => {
     console.log("server running");
 });

@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from "./navbar";
+
+
 
 function Users() {
     const [users, setUsers] = useState([]);
@@ -9,6 +12,11 @@ function Users() {
     useEffect(() => {
         loadUsers();
     }, []);
+
+    const formatDate = (dateString) => {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateString).toLocaleDateString("en-US", options);
+    };
 
     const loadUsers = () => {
         axios.get('http://localhost:3001/')
@@ -20,9 +28,6 @@ function Users() {
         navigate('/create'); 
     };
 
-    const navigateToUpdateUser = (userId) => { 
-        navigate(`/update/${userId}`);
-    };
 
     const onDeleteUser = (userId) => {
         axios.delete(`http://localhost:3001/deleteUser/${userId}`)
@@ -33,13 +38,14 @@ function Users() {
 
     return (
         <>
+            <Navbar />
             <div className="users-container">
-                <div className="header-title">Guest List Logger</div>
+                <div className="header-title">Students Entry List</div>
                 <button className="create-guest-btn" onClick={navigateToCreateUser}>Create New Guest</button>
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Guest Name</th>
+                            <th>Student</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Date and Time</th>
@@ -53,7 +59,7 @@ function Users() {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
-                                <td>{user.date}</td>
+                                <td>{formatDate(user.date)}</td>
                                 <td>{user.nationality}</td>
                                 <td>
                                 <button className="action-btn edit"><Link className="text-white text-decoration-none" to={`/update/${user._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
