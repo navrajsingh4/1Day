@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Users() {
     const [users, setUsers] = useState([]);
@@ -56,7 +56,7 @@ function Users() {
                                 <td>{user.date}</td>
                                 <td>{user.nationality}</td>
                                 <td>
-                                <button className="action-btn delete"><Link to={`/update/${display._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
+                                <button className="action-btn edit"><Link className="text-white text-decoration-none" to={`/update/${user._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
                                     <button 
                                         className="action-btn delete" 
                                         onClick={() => onDeleteUser(user._id)}>Delete</button> {/* Pass the _id to the function */}
