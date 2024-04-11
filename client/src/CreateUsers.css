@@ -1,0 +1,38 @@
+/* CreateUsers.css */
+.container {
+    display: flex;
+    justify-content: space-between; /* Horizontally align items */
+    align-items: center; /* Vertically center items */
+}
+
+.form-container {
+    background-color: lightyellow; /* Light yellow color for form container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+}
+
+.label {
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: skyblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #4CAF50;
+}
