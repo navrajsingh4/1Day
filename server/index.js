@@ -10,13 +10,21 @@ app.use(express.json())
 
 mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne")
 
-app.get("/", async (req,res) => {
+app.get('/', async (req,res) => {
     UserModel.find({})
     .then(users => res.json(users))
     .catch(err => res.json(err))
 }
 
 )
+
+app.put('/updateUser/:id', (req, res) =>{
+    const id = req.params.id;
+    UserModel.findByIdAndUpdate({_id: id}, {name: req.body.name, email: req.body.email, phone: req.body.phone, date: req.body.date, nationality: req.body.nationality})
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+
+})
 
 app.post("/createUser", (req, res) => {
     UserModel.create(req.body)

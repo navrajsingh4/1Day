@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Users () {
-    const [users,SetUsers]=useState([])    
+    const [users,SetUsers]=useState([])  
+
     useEffect(()=>{
         axios.get('http://localhost:3001/')
         .then(result => SetUsers(result.data))
         .catch(err => console.log(err))
     },[])
+
     return (
         
         <div>
@@ -33,7 +35,7 @@ function Users () {
                                 <td>{display.date}</td>
                                 <td>{display.nationality}</td>
                                 <td>
-                               <Link to={`/update/${users._id}`}><button>Edit</button></Link> 
+                               <Link to={`/update/${display._id}`}>Edit</Link> 
                                 </td>
                             </tr>
                         }
