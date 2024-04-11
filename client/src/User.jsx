@@ -59,11 +59,17 @@ function Users() {
                                 <button className="action-btn edit"><Link className="text-white text-decoration-none" to={`/update/${user._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
                                     <button 
                                         className="action-btn delete" 
-                                        onClick={() => onDeleteUser(user._id)}>Delete</button> {/* Pass the _id to the function */}
+                                        onClick={() => onDeleteUser(user._id)}>Delete</button> 
                                 </td>
                             </tr>
                         ))}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="5">Total Guests</td>
+                            <td>{users.length}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
