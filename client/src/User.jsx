@@ -48,7 +48,7 @@ function Users() {
                             <th>Student</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Date and Time</th>
+                            <th>Date</th>
                             <th>Nationality</th>
                             <th>Actions</th>
                         </tr>
@@ -72,7 +72,7 @@ function Users() {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="5">Total Guests</td>
+                            <td colSpan="5">Total Students</td>
                             <td>{users.length}</td>
                         </tr>
                     </tfoot>
