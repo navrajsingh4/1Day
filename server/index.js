@@ -1,45 +1,26 @@
-const express =require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const UserModel=require('./models/Guests')
-const app = express()
-app. use(cors())
-app.use(express.json())
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const UserModel = require('./models/Guests');
+const app = express();
 
+app.use(cors());
+app.use(express.json());
 
-mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne")
-
-app.get("/", async (req,res) => {
-    UserModel.find({})
-    .then(users => res.json(users))
-    .then(err => res.json(err))
-}
-
-)
-
-app.post("/createUser", (req, res) => {
-    UserModel.create(req.body)
-    .then(users => res.json(users))
-    .catch(err=> res.json(err))
-}
-)
-
-app.get('/getUser/',(req, res) =>{
-    const id = req.params.id;
-    UserModel.findById({_id:id})
-    .then(users => res.json(users))
-    .catch(err=> res.json(err))
+// Connect to MongoDB
+mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected successfully"))
-.catch(err => console.log('Could not connect to MongoDB:', err));
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.log('error', err));
 
 // get users
 app.get("/", async (req, res) => {
     try {
-        const users = await UserModel.find({}).exec(); // Use exec to get a true Promise
+        const users = await UserModel.find({}).exec();
         res.json(users);
     } catch (err) {
-        // This will catch any errors that occur during the finding process
         res.status(500).json({ error: err.message });
     }
 });
@@ -68,7 +49,39 @@ app.get('/getUser/:id', async (req, res) => {
     }
 });
 
+// Delete user
+app.delete('/deleteUser/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await UserModel.deleteOne({ _id: id });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json({ message: 'User successfully deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Update user
+app.put('/updateUser/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel
+            .findByIdAndUpdate(id, req
+            .body, { new: true }) // Use req.body here
+            .exec();
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+);
+
 // Start
 app.listen(3001, () => {
-    console.log("Server is Running");
+    console.log("server running");
 });
