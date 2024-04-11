@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Users () {
     const [users,SetUsers]=useState([])    
@@ -19,6 +20,7 @@ function Users () {
                         <th>Phone</th>
                         <th>Date</th>
                         <th>Nationality</th>
+                    
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +32,9 @@ function Users () {
                                 <td>{display.phone}</td>
                                 <td>{display.date}</td>
                                 <td>{display.nationality}</td>
-                                <td><button>Edit</button></td>
+                                <td>
+                               <Link to={`/update/${users._id}`}><button>Edit</button></Link> 
+                                </td>
                             </tr>
                         }
                     )

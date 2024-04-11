@@ -1,9 +1,9 @@
 import React, { useEffect,useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import  axios  from "axios";
 
 function UpdateUsers() {
-    const {id} = useSearchParams()
+    const {id} = useParams()
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -14,6 +14,7 @@ function UpdateUsers() {
     useEffect(()=>{
         axios.get('http://localhost:3001/getUser/'+id)
         .then(result => {console.log(result)
+    .catch(err => console.log(err))
             setName(result.date.name)
             setEmail(result.date.email)
             setPhone(result.date.phone)
@@ -21,8 +22,7 @@ function UpdateUsers() {
             setNationality(result.date.nationality)
         
         })
-
-        //.catch(err => console.log(err))
+        
     },[])
 
 
