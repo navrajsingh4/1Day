@@ -1,20 +1,16 @@
+// App.js
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GuestUserManagement from "./pages/GuestUserManagement"; // Assuming the pages/ folder
+import GuestUserManagement from "./components/GuestUserManagement"; // Ensure the path is correct based on your file structure
 
 function App() {
-
-
   return (
-    <>
-      <BrowserRouter>
-        {/* ... other routes ... */}
-        <Routes>
-          {/* ... other route definitions ... */}
-          <Route path="/guest-management/*" element={<GuestUserManagement />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* ...other routes... */}
+        <Route path="/guest-management/*" element={<GuestUserManagement />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
