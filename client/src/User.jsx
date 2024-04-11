@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from "./navbar";
 
-
-
 function Users() {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
@@ -34,7 +32,6 @@ function Users() {
             .then(() => loadUsers())
             .catch(err => console.log(err));
     };
-
 
     return (
         <>

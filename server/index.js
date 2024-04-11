@@ -31,10 +31,11 @@ app.post("/createUser", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 app.get('/getUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const user = await UserModel.findById(id).exec(); // Use exec here as well
+        const user = await UserModel.findById(id).exec(); 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -56,6 +57,7 @@ app.delete('/deleteUser/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 app.put('/updateUser/:id', async (req, res) => {
     try {
         const id = req.params.id;
