@@ -9,16 +9,16 @@ function CreateUsers() {
     const [phone, setPhone] = useState("");
     const [date, setDate] = useState("");
     const [nationality, setNationality] = useState("");
-    const navigate = useNavigate();   
+    const navigate =useNavigate()   
 
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post("http://localhost:3001/createUser",{name,email,phone,date,nationality})
         .then(result => {
             console.log(result)
-            navigate('/');
-        })
-        .catch(err => console.log(err));
+            navigate('/')
+            })
+        .catch(err => console.log(err))
     };
 
     return (
