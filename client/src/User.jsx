@@ -1,24 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom';
 
 function Users() {
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const navigate = useNavigate();
 
     useEffect(() => {
+        loadUsers();
+    }, []);
+
+    const loadUsers = () => {
         axios.get('http://localhost:3001/')
             .then(result => setUsers(result.data))
             .catch(err => console.log(err));
-    }, []);
+    }
 
     const navigateToCreateUser = () => {
-        navigate('/create'); // Use the navigate method to navigate
+        navigate('/create'); 
     };
 
-    const navigateToUpdateUser = (id) => {
-        navigate(`/update/${id}`); // Use the navigate method to navigate
-    }
+    const navigateToUpdateUser = (userId) => { 
+        navigate(`/update/${userId}`);
+    };
+
+    const onDeleteUser = (userId) => {
+        axios.delete(`http://localhost:3001/deleteUser/${userId}`)
+            .then(() => loadUsers())
+            .catch(err => console.log(err));
+    };
+
 
     return (
         <>
@@ -38,15 +49,19 @@ function Users() {
                     </thead>
                     <tbody>
                         {users.map((user) => (
-                            <tr key={user.id}>
+                            <tr key={user._id}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.date}</td>
                                 <td>{user.nationality}</td>
                                 <td>
-                                    <button className="action-btn edit" onClick={navigateToUpdateUser}>Update</button>
-                                    <button className="action-btn delete">Delete</button>
+                                    <button 
+                                        className="action-btn edit" 
+                                        onClick={() => navigateToUpdateUser(user._id)}>Update</button> {/* Pass the _id to the function */}
+                                    <button 
+                                        className="action-btn delete" 
+                                        onClick={() => onDeleteUser(user._id)}>Delete</button> {/* Pass the _id to the function */}
                                 </td>
                             </tr>
                         ))}

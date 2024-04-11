@@ -49,6 +49,38 @@ app.get('/getUser/:id', async (req, res) => {
     }
 });
 
+// Delete user
+app.delete('/deleteUser/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await UserModel.deleteOne({ _id: id });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json({ message: 'User successfully deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Update user
+app.put('/updateUser/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel
+            .findByIdAndUpdate(id, req
+            .body, { new: true }) // Use req.body here
+            .exec();
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+);
+
 // Start
 app.listen(3001, () => {
     console.log("server running");
