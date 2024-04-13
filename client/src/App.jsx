@@ -6,6 +6,7 @@ import Users from './User'
 import CreateUsers from './CreateUser'
 import UpdateUsers from './UpdateUser'
 import Home from './Home'
+import ProfilePage from './ProfilePage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />}></Route>
+          <Route path='/profile' element={<ProfilePage />}></Route>
           <Route path='/users' element={<Users />}></Route>
           <Route path='/create' element={<CreateUsers />}></Route>
           <Route path='/update/:id' element={<UpdateUsers />}></Route>

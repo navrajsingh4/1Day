@@ -7,6 +7,10 @@ function Users() {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
+    const navigateTo = (path) => {
+        navigate(path);
+      };
+
     useEffect(() => {
         loadUsers();
     }, []);
@@ -63,6 +67,9 @@ function Users() {
                                     <button 
                                         className="action-btn delete" 
                                         onClick={() => onDeleteUser(user._id)}>Delete</button> 
+                                    <button 
+                                        className="action-btn profile" 
+                                        onClick={() => navigateTo("/profile")}>Profile</button> 
                                 </td>
                             </tr>
                         ))}
