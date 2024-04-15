@@ -5,10 +5,39 @@ import Navbar from "./navbar";
 
 function Filter() {
   const [users, setUsers] = useState([]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const navigate = useNavigate();
 
   const navigateTo = (path) => {
     navigate(path);
+  };
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
+
+  const setfilters = () => {
+    const filteredUsers = users.filter(user => {
+      const userDate = new Date(user.date);
+      const filterStartDate = startDate ? new Date(startDate) : null;
+      const filterEndDate = endDate ? new Date(endDate) : null;
+
+      if (filterStartDate && userDate < filterStartDate) {
+        return false; // Exclude if user date is before start date
+      }
+      if (filterEndDate && userDate > filterEndDate) {
+        return false; // Exclude if user date is after end date
+      }
+      return true;
+    });
+
+    setUsers(filteredUsers);
+
   };
 
   useEffect(() => {
@@ -50,6 +79,8 @@ function Filter() {
           <input
             type="date"
             id="start-date"
+            value={startDate}
+            onChange={handleStartDateChange}
 
           />
           <br />
@@ -57,13 +88,17 @@ function Filter() {
           <input
             type="date"
             id="end-date"
+            value={endDate}
+            onChange={handleEndDateChange}
 
           />
+          <br />
+          <button className="fltr-btn" onClick={setfilters}>filternow</button>
         </div>
         <button className="create-guest-btn" onClick={navigateToCreateUser}>
           Create New Guest
         </button>
-        <button className="filter-btn" onClick={navigateToFilter}>
+        <button className="create-guest-btn" onClick={navigateToFilter}>
           Filters
         </button>
         <table className="table">
@@ -127,11 +162,14 @@ function Filter() {
                 }
 
                 .header-title {
-                    text-align: center;
-                    font-size: 50px;
-                    margin: 20px 0;
-                    color: blue;
+                    text-align: center;                   
+                    margin: 20px 0;                
                     font-weight: bold;
+                }
+
+                .fltr-btn {
+                  background-color: cyan;
+                  margin-top:5px;
                 }
 
                 .create-guest-btn {
@@ -139,6 +177,7 @@ function Filter() {
                     color: white;
                     padding: 10px 24px;
                     margin-bottom: 20px;
+                    margin-left: 5px;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;

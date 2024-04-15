@@ -48,7 +48,7 @@ function Users() {
             <div className="users-container">
                 <div className="header-title">Students Entry List</div>
                 <button className="create-guest-btn" onClick={navigateToCreateUser}>Create New Guest</button>
-                <button className="filter-btn" onClick={navigateToFilter}>Filters</button>
+                <button className="create-guest-btn" onClick={navigateToFilter}>Filters</button>
                 <table className="table">
                     <thead>
                         <tr>
@@ -108,6 +108,7 @@ function Users() {
                     color: white;
                     padding: 10px 24px;
                     margin-bottom: 20px;
+                    margin-left: 5px;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
