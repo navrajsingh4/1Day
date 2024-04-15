@@ -8,6 +8,7 @@ import UpdateUsers from './UpdateUser'
 import Home from './Home'
 import ProfilePage from './ProfilePage'
 import Filter from './Filter'
+import Login from './LoginPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +23,7 @@ function App() {
           <Route path='/create' element={<CreateUsers />}></Route>
           <Route path='/update/:id' element={<UpdateUsers />}></Route>
           <Route path='/filter' element={<Filter/>}> </Route>
+          <Route path='/login' element={<Login/>}></Route>
           </Routes>
       </BrowserRouter>
     </div>
