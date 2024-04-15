@@ -27,8 +27,13 @@ function Users() {
     }
 
     const navigateToCreateUser = () => {
-        navigate('/create'); 
+        navigate('/create');         
     };
+    const navigateToFilter = () => {
+        navigate('/filter'); 
+    };
+
+    
 
 
     const onDeleteUser = (userId) => {
@@ -43,6 +48,7 @@ function Users() {
             <div className="users-container">
                 <div className="header-title">Students Entry List</div>
                 <button className="create-guest-btn" onClick={navigateToCreateUser}>Create New Guest</button>
+                <button className="filter-btn" onClick={navigateToFilter}>Filters</button>
                 <table className="table">
                     <thead>
                         <tr>
