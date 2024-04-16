@@ -115,32 +115,23 @@ function Filter() {
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td>{user.name}</td>
+                <td><Link className="text-black text-decoration-none" to={`/profile/${user._id}`}>{user.name}</Link></td>
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td>{formatDate(user.date)}</td>
                 <td>{user.nationality}</td>
                 <td>
-                  <button className="action-btn edit">
                     <Link
                       className="text-white text-decoration-none"
                       to={`/update/${user._id}`}
                     >
-                      Edit
-                    </Link>
-                  </button>{" "}
-                  {/* Pass the _id to the function */}
+                     <button className="action-btn edi"> Edit</button>
+                  </Link>
                   <button
                     className="action-btn delete"
                     onClick={() => onDeleteUser(user._id)}
                   >
                     Delete
-                  </button>
-                  <button
-                    className="action-btn profile"
-                    onClick={() => navigateTo("/profile")}
-                  >
-                    Profile
                   </button>
                 </td>
               </tr>
@@ -148,78 +139,77 @@ function Filter() {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan="5">Total Students</td>
-              <td>{users.length}</td>
+              <td colSpan="5"><b>Total Students</b></td>
+              <td><b>{users.length}</b></td>
             </tr>
           </tfoot>
         </table>
       </div>
 
       <style>{`
-                .users-container {
-                    padding: 20px;
-                    font-family: Arial, sans-serif;
+                  .users-container {
+                      padding: 20px;
+                      font-family: Arial, sans-serif;
+                  }
+
+                  .header-title {
+                      text-align: center;                   
+                      margin: 20px 0;                
+                      font-weight: bold;
+                  }
+
+                  .fltr-btn {
+                    background-color: cyan;
+                    margin-top:5px;
+                  }
+
+                  .create-guest-btn {
+                      background-color: #4CAF50; 
+                      color: white;
+                      padding: 10px 24px;
+                      margin-bottom: 20px;
+                      margin-left: 5px;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      float: right;
+                  }
+
+                  .table {
+                      width: 100%;
+                      border-collapse: collapse;
+                  }
+
+                  .table th, .table td {
+                      text-align: left;
+                      padding: 8px;
+                      border-bottom: 1px solid #ddd;
+                  }
+
+                  .table th {
+                      background-color: #f2f2f2;
+                  }
+
+                  .action-btn {
+                      margin-right: 5px;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      padding: 5px 10px;
+                  }
+
+                  .edi{
+                    background-color:skyblue;
                 }
 
-                .header-title {
-                    text-align: center;                   
-                    margin: 20px 0;                
-                    font-weight: bold;
-                }
+                  .delete {
+                      background-color: #F44336; 
+                      color: white;
+                  }
 
-                .fltr-btn {
-                  background-color: cyan;
-                  margin-top:5px;
-                }
-
-                .create-guest-btn {
-                    background-color: #4CAF50; 
-                    color: white;
-                    padding: 10px 24px;
-                    margin-bottom: 20px;
-                    margin-left: 5px;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    float: right;
-                }
-
-                .table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-
-                .table th, .table td {
-                    text-align: left;
-                    padding: 8px;
-                    border-bottom: 1px solid #ddd;
-                }
-
-                .table th {
-                    background-color: #f2f2f2;
-                }
-
-                .action-btn {
-                    margin-right: 5px;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                }
-
-                .edit {
-                    background-color: #007BFF; 
-                    color: white;
-                }
-
-                .delete {
-                    background-color: #F44336; 
-                    color: white;
-                }
-
-                .create-guest-btn:hover, .action-btn:hover {
-                    opacity: 0.8;
-                }
+                  .create-guest-btn:hover, .action-btn:hover {
+                      opacity: 0.8;
+                  }
             `}</style>
     </>
   );

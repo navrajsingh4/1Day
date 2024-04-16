@@ -1,4 +1,4 @@
-/* CreateUsers.css */
+
 .container {
     display: flex;
     justify-content:center;
@@ -6,7 +6,7 @@
 }
 
 .form-container {
-    background-color: lightyellow; /* Light yellow color for form container */
+    background-color: rgba(255, 255, 255, 0.8); /* Light yellow color for form container */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
@@ -27,7 +27,6 @@
 .button {
     padding: 10px 20px;
     background-color: skyblue;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;

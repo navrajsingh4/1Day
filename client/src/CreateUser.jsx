@@ -28,8 +28,8 @@ function CreateUsers() {
             <main>
             <div className="container">
                 <div className="form-container">
-                    <h2>Enter Student</h2>
                     <form onSubmit={handleSubmit}>
+                    <h2>Enter Student</h2>
                         <label className="label">
                             Name:
                             <input 
@@ -39,7 +39,7 @@ function CreateUsers() {
                                 onChange={(e) => setName(e.target.value)} 
                                 required 
                             />
-                        </label>
+                        </label><br/>
                         <label className="label">
                             Email:
                             <input 
@@ -49,7 +49,7 @@ function CreateUsers() {
                                 onChange={(e) => setEmail(e.target.value)} 
                                 required 
                             />
-                        </label>
+                        </label><br/>
                         <label className="label">
                             Phone:
                             <input 
@@ -59,7 +59,7 @@ function CreateUsers() {
                                 onChange={(e) => setPhone(e.target.value)} 
                                 required 
                             />
-                        </label>
+                        </label><br/>
                         <label className="label">
                             Date:
                             <input 
@@ -69,7 +69,7 @@ function CreateUsers() {
                                 onChange={(e) => setDate(e.target.value)} 
                                 required 
                             />
-                        </label>
+                        </label><br/>
                         <label className="label">
                             Nationality:
                             <input 
@@ -79,7 +79,7 @@ function CreateUsers() {
                                 onChange={(e) => setNationality(e.target.value)} 
                                 required 
                             />
-                        </label>
+                        </label><br/>
                         <button className="button" type="submit">Submit</button>
                     </form>
                 </div>

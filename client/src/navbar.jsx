@@ -21,7 +21,6 @@ const Navbar = () => {
           <li><button onClick={() => navigateTo("/")}>Home</button></li>
           <li><button onClick={() => navigateTo("/create")}>Create</button></li>
           <li><button onClick={() => navigateTo("/users")}>Users</button></li>
-          <li><button onClick={() => navigateTo("/login")}>Login</button></li>
         </ul>
       </div>
     </nav>

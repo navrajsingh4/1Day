@@ -63,27 +63,25 @@ function Users() {
                     <tbody>
                         {users.map((user) => (
                             <tr key={user._id}>
-                                <td>{user.name}</td>
+                                <td><Link className="text-black text-decoration-none" to={`/profile/${user._id}`}>{user.name}</Link></td>
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
                                 <td>{formatDate(user.date)}</td>
                                 <td>{user.nationality}</td>
                                 <td>
-                                <button className="action-btn edit"><Link className="text-white text-decoration-none" to={`/update/${user._id}`}>Edit</Link></button> {/* Pass the _id to the function */}
+                                <Link className="text-white text-decoration-none" to={`/update/${user._id}`}>
+                                    <button className="action-btn edi">Edit</button></Link> {/* Pass the _id to the function */}
                                     <button 
                                         className="action-btn delete" 
                                         onClick={() => onDeleteUser(user._id)}>Delete</button> 
-                                    <button 
-                                        className="action-btn profile" 
-                                        onClick={() => navigateTo("/profile")}>Profile</button> 
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="5">Total Students</td>
-                            <td>{users.length}</td>
+                            <td colSpan="5"><b>Total Students</b></td>
+                            <td><b>{users.length}</b></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -99,7 +97,7 @@ function Users() {
                     text-align: center;
                     font-size: 50px;
                     margin: 20px 0;
-                    color: blue;
+                    font-style: italic;
                     font-weight: bold;
                 }
 
@@ -131,21 +129,18 @@ function Users() {
                 }
 
                 .action-btn {
-                    margin-right: 5px;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
                     padding: 5px 10px;
                 }
 
-                .edit {
-                    background-color: #007BFF; 
-                    color: white;
-                }
-
                 .delete {
                     background-color: #F44336; 
                     color: white;
+                }
+                .edi{
+                    background-color:skyblue;
                 }
 
                 .create-guest-btn:hover, .action-btn:hover {
