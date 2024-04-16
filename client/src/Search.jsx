@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./navbar";
 
 function Search() {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadUsers();
@@ -48,25 +49,31 @@ function Search() {
     setSearchTerm(event.target.value);
   };
 
-  const onDeleteUser = (userId) => {
-    axios.delete(`http://localhost:3001/deleteUser/${userId}`)
-      .then(() => loadUsers())
-      .catch((err) => console.log(err));
+  const navigateToCreateUser = () => {
+    navigate("/create");
+  };
+
+  const navigateToFilters = () => {
+    navigate("/filter");
   };
 
   return (
     <>
       <Navbar />
-      <div className="users-container">
-        <div className="header-title">
+      <div className="search-container">
+        <div className="search-header">
           <input
             type="text"
-            placeholder="Search by name, nationality, email, or phone..."
+            placeholder="Search by name, nationality, email, or phone."
             value={searchTerm}
             onChange={onChangeSearchInput}
             className="search-input"
           />
-          <button className="search-btn" onClick={onSearch}>Search</button>
+          <button className="green-btn" onClick={onSearch}>Search</button>
+        </div>
+        <div className="button-group">
+          <button className="green-btn" onClick={navigateToFilters}>Filters</button>
+          <button className="green-btn" onClick={navigateToCreateUser}>Create New Guest</button>
         </div>
         <table className="table">
           <thead>
@@ -86,7 +93,7 @@ function Search() {
                 <td>{user.phone}</td>
                 <td>{user.nationality}</td>
                 <td>
-                  <Link to={`/update/${user._id}`} className="action-btn edi">Edit</Link>
+                  <Link to={`/update/${user._id}`} className="action-btn edit">Edit</Link>
                   <button
                     className="action-btn delete"
                     onClick={() => onDeleteUser(user._id)}
@@ -97,41 +104,42 @@ function Search() {
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan="4"><b>Total Students</b></td>
-              <td><b>{filteredUsers.length}</b></td>
-            </tr>
-          </tfoot>
         </table>
       </div>
       <style>{`
-        .users-container {
+        .search-container {
           padding: 20px;
           font-family: Arial, sans-serif;
         }
 
-        .header-title {
-          text-align: center;                   
-          margin: 20px 0;                
-          font-weight: bold;
+        .search-header {
+          text-align: center;
+          margin-bottom: 20px;
         }
 
         .search-input {
           padding: 10px;
-          margin-bottom: 20px;
           border-radius: 4px;
           border: 1px solid #ccc;
-          width: calc(100% - 120px);
+          width: calc(100% - 240px);
+          margin-right: 10px;
         }
 
-        .search-btn {
+        .green-btn {
+          background-color: #4CAF50;
+          color: white;
           padding: 10px 20px;
-          margin-left: 10px;
-          background-color: cyan;
           border: none;
           border-radius: 4px;
           cursor: pointer;
+          margin-right: 10px;
+          margin-bottom: 20px;
+          float: right;
+        }
+
+        .button-group {
+          text-align: center;
+          margin-bottom: 20px;
         }
 
         .table {
@@ -140,7 +148,6 @@ function Search() {
         }
 
         .table th, .table td {
-          text-align: left;
           padding: 8px;
           border-bottom: 1px solid #ddd;
         }
@@ -149,24 +156,27 @@ function Search() {
           background-color: #f2f2f2;
         }
 
-        .action-btn {
-          margin-right: 5px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          padding: 5px 10px;
-        }
-
-        .edi {
+        .action-btn.edit {
           background-color: skyblue;
-        }
-
-        .delete {
-          background-color: #F44336; 
           color: white;
+          padding: 5px 10px;
+          border-radius: 4px;
+          text-decoration: none;
+          margin-right: 5px;
         }
 
-        .search-btn:hover, .action-btn:hover {
+        .action-btn.delete {
+          background-color: #F44336;
+          color: white;
+          padding: 5px 10px;
+          border-radius: 4px;
+          border: none;
+          cursor: pointer;
+        }
+
+        .green-btn:hover,
+        .action-btn.edit:hover,
+        .action-btn.delete:hover {
           opacity: 0.8;
         }
       `}</style>
