@@ -32,6 +32,9 @@ function Users() {
     const navigateToFilter = () => {
         navigate('/filter'); 
     };
+    const navigateToSearch = () => {
+        navigate('/search');
+    };
 
     
 
@@ -49,6 +52,7 @@ function Users() {
                 <div className="header-title">Students Entry List</div>
                 <button className="create-guest-btn" onClick={navigateToCreateUser}>Create New Guest</button>
                 <button className="create-guest-btn" onClick={navigateToFilter}>Filters</button>
+                <button className="create-guest-btn" onClick={navigateToSearch}>Search</button>
                 <table className="table">
                     <thead>
                         <tr>

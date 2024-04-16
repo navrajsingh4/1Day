@@ -13,6 +13,10 @@ function Filter() {
     navigate(path);
   };
 
+  const navigateToSearch = () => {
+    navigate("/search");
+  }
+
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
   };
@@ -28,10 +32,10 @@ function Filter() {
       const filterEndDate = endDate ? new Date(endDate) : null;
 
       if (filterStartDate && userDate < filterStartDate) {
-        return false; // Exclude if user date is before start date
+        return false; 
       }
       if (filterEndDate && userDate > filterEndDate) {
-        return false; // Exclude if user date is after end date
+        return false; 
       }
       return true;
     });
@@ -101,6 +105,7 @@ function Filter() {
         <button className="create-guest-btn" onClick={navigateToFilter}>
           Filters
         </button>
+        <button className="create-guest-btn" onClick={navigateToSearch}>Search</button>
         <table className="table">
           <thead>
             <tr>
