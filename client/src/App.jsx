@@ -9,6 +9,7 @@ import Home from './Home'
 import ProfilePage from './ProfilePage'
 import Filter from './Filter'
 import Search from './Search'
+import Graphing from './Graph'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/update/:id' element={<UpdateUsers />}></Route>
           <Route path='/filter' element={<Filter/>}> </Route>
           <Route path='/search' element={<Search/>}> </Route>
+          <Route path='/graph' element={<Graphing/>}> </Route>
           </Routes>
       </BrowserRouter>
     </div>
