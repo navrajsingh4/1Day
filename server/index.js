@@ -1,12 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const multer = require('multer')
 const UserModel = require('./models/Guests');
 const app = express();
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
+const storage = multer.diskStorage({
+    destination:(req,file, cb) => {
+        cb(null,'public/')
+    },
+    filename:(req, file, cb) => {
+        cb(null, file.fieldname +"_" + Date.now() + path.extname(file.originalname))
+    }
+})
 
+const upload = multer({
+    storage: storage
+})
 mongoose.connect("mongodb+srv://Guest:Capstone123@cluster0.imrm549.mongodb.net/DayOne", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -23,9 +36,9 @@ app.get("/", async (req, res) => {
     }
 });
 
-app.post("/createUser", async (req, res) => {
+app.post("/createUser",upload.single('file'), async (req, res) => {
     try {
-        const user = await UserModel.create(req.body);
+        const user = await UserModel.create(req.body,{image: req.file.filename});
         res.json(user);
     } catch (err) {
         res.status(500).json({ error: err.message });

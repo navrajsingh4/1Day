@@ -10,17 +10,31 @@ function CreateUsers() {
     const [phone, setPhone] = useState("");
     const [date, setDate] = useState("");
     const [nationality, setNationality] = useState("");
+    const [file, setFile] = useState();
     const navigate =useNavigate()   
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/createUser",{name,email,phone,date,nationality})
-        .then(result => {
-            console.log(result)
-            navigate('/')
-            })
-        .catch(err => console.log(err))
+        try {
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('date', date);
+            formData.append('nationality', nationality);
+            formData.append('file', file);
+    
+            axios.post("http://localhost:3001/createUser", formData)
+                .then(result => {
+                    console.log(result);
+                    navigate('/');
+                })
+                .catch(err => console.log(err));
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
+    
 
     return (
         <div>
@@ -79,7 +93,13 @@ function CreateUsers() {
                                 onChange={(e) => setNationality(e.target.value)} 
                                 required 
                             />
-                        </label><br/>
+                        </label><br />
+                        <label className="label">
+                            <input type="file"
+                            className="input"
+                            onChange={(e) => setFile(e.target.files[0])} />
+                        </label>
+                        <br/>
                         <button className="button" type="submit">Submit</button>
                     </form>
                 </div>
