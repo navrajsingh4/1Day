@@ -38,9 +38,12 @@ app.get("/", async (req, res) => {
 
 app.post("/createUser",upload.single('file'), async (req, res) => {
     try {
-        const user = await UserModel.create(req.body,{image: req.file.filename});
-        res.json(user);
-    } catch (err) {
+        const userImage = {
+            ...req.body,
+            image:req.file.filename};
+        const user = await UserModel.create(userImage);
+        res.json(userImage);
+     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });

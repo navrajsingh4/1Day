@@ -11,6 +11,7 @@ const ProfilePage = () => {
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [nationality, setNationality] = useState("");
+  const [image, setImage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const ProfilePage = () => {
             setPhone(phone);
             setDate(date);
             setNationality(nationality);
+            setNationality(image);
         })
         .catch(err => console.log(err));
 }, [id]);
@@ -35,7 +37,7 @@ const ProfilePage = () => {
     <div><Navbar/>
     <div className="profile">
       <div className="display">
-      <img src="../public/profile.png" alt="Profile Picture" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
+      <img src="" alt="Profile Picture" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
       <h1>{name}</h1>
       <p>Email: {email}</p>
       <p>Phone: {phone}</p>
